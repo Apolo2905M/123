@@ -37,58 +37,100 @@ public class Publicacion {
 
 //modeloautor
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Autor {
-    private int cantidadPublicaciones;
-    private String filiacion;
-    private String linealInvestigacion;
-    private String nacionalidad;
-    private String nombre;
-    private Publicacion[] publicaciones;
-//No se si vale lo de abajo//
     private int cantidadPublicaciones;
     private String filiacion;
     private String lineaInvestigacion;
     private String nacionalidad;
     private String nombre;
-    private List<Publicacion> publicaciones;
-    private int tamañoArreglo;
+    private Publicacion[] publicaciones;
+
+    public Autor(int tamañoArreglo) {
+        this.publicaciones = new Publicacion[tamañoArreglo];
+        this.cantidadPublicaciones = 0;
+    }
 
     public Autor(String filiacion, String lineaInvestigacion, String nacionalidad, String nombre, int tamañoArreglo) {
-        this.cantidadPublicaciones = 0;
         this.filiacion = filiacion;
         this.lineaInvestigacion = lineaInvestigacion;
         this.nacionalidad = nacionalidad;
         this.nombre = nombre;
-        this.tamañoArreglo = tamañoArreglo;
-        this.publicaciones = new ArrayList<>(tamañoArreglo);
+        this.publicaciones = new Publicacion[tamañoArreglo];
+        this.cantidadPublicaciones = 0;
+    }
+
+    public void AgregarPublicacion(Publicacion publicacionNueva) {
+        if (cantidadPublicaciones < publicaciones.length) {
+            publicaciones[cantidadPublicaciones] = publicacionNueva;
+            cantidadPublicaciones++;
+        } else {
+            System.out.println("No se pueden agregar más publicaciones.");
+        }
+    }
+
+    public int getCantidadPublicaciones() {
+        return cantidadPublicaciones;
+    }
+
+    public String getFiliacion() {
+        return filiacion;
+    }
+
+    public String getLineaInvestigacion() {
+        return lineaInvestigacion;
+    }
+
+    public String getNacionalidad() {
+        return nacionalidad;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public Publicacion[] getPublicaciones() {
+        return publicaciones;
     }
 
     public void setCantidadPublicaciones(int cantidadPublicaciones) {
-        if (cantidadPublicaciones > this.tamañoArreglo) {
-            throw new IllegalArgumentException("El número de publicaciones no puede exceder el tamaño del arreglo.");
-        }
         this.cantidadPublicaciones = cantidadPublicaciones;
     }
 
-    public void agregarPublicacion(Publicacion publicacionNueva) {
-        if (this.cantidadPublicaciones < this.tamañoArreglo) {
-            this.publicaciones.add(publicacionNueva);
-            this.cantidadPublicaciones++;
-        } else {
-            throw new IllegalArgumentException("No se pueden agregar más publicaciones, límite alcanzado.");
-        }
+    public void setFiliacion(String filiacion) {
+        this.filiacion = filiacion;
+    }
+
+    public void setLineaInvestigacion(String lineaInvestigacion) {
+        this.lineaInvestigacion = lineaInvestigacion;
+    }
+
+    public void setNacionalidad(String nacionalidad) {
+        this.nacionalidad = nacionalidad;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setPublicaciones(Publicacion[] publicaciones) {
+        this.publicaciones = publicaciones;
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Autor: ").append(nombre).append(" Publicaciones: ");
-        for (Publicacion pub : publicaciones) {
-            sb.append(pub.toString()).append(" ");
+        sb.append("Autor{");
+        sb.append("nombre='").append(nombre).append('\'');
+        sb.append(", filiacion='").append(filiacion).append('\'');
+        sb.append(", lineaInvestigacion='").append(lineaInvestigacion).append('\'');
+        sb.append(", nacionalidad='").append(nacionalidad).append('\'');
+        sb.append(", cantidadPublicaciones=").append(cantidadPublicaciones);
+        sb.append(", publicaciones=[");
+        for (int i = 0; i < cantidadPublicaciones; i++) {
+            sb.append(publicaciones[i].toString());
+            if (i < cantidadPublicaciones - 1) sb.append(", ");
         }
-        return sb.toString().trim();
+        sb.append("]}");
+        return sb.toString();
     }
 }
