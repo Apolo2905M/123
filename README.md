@@ -1,4 +1,4 @@
-//modelopublicacion
+modelopublicacion
 
 public class Publicacion {
     private int año;
@@ -23,8 +23,7 @@ public class Publicacion {
 
 
 
-
-//modeloautor
+modeloautor
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +35,9 @@ public class Autor {
     private String nacionalidad;
     private String nombre;
     private Publicacion[] publicaciones;
-//No se si vale lo de abajo//
+    
+No se si vale lo de abajo/
+
     private int cantidadPublicaciones;
     private String filiacion;
     private String lineaInvestigacion;
